@@ -1,0 +1,37 @@
+#!/bin/bash
+# NOTE replace YOURPATH_ with the correct path. 
+#
+# to download the force field from
+#https://www.charmm.org/archive/charmm/resources/charmm-force-fields/download.php?filename=CHARMM_ff_params_files/ar
+chive/charmm36-jul2017.ff.tgz
+#
+# set  force field directory 
+export GMXLIB={YOURFORCEFIELD_PATH}/forcefield
+# source GROMACS 
+source {YOURGROMACS_PATH}/gmx2020.7/bin/GMXRC
+# set $name  
+export name=antibody
+# replace XXXX with PDB name and XX with the appropriate cutoff
+for dir in { XXXX XXXX XXXX  } # cut-off XX
+#for dir in { 2W9E  3HI6 4DN4 3HMX } # cut-off 0.12
+#for dir in { 3V6Z 3G6D 3E01 } # cut-off 0.15
+#for dir in { 4G6J 3RVW 3L5W } # cut-off 0.13
+do
+cd $dir/antibody/MD
+pwd
+mkdir interface_gromos
+cd interface_gromos
+# cluster analysis
+# output -> the whole protein
+# analysis ->  backbone_interface that last group in index file  
+gmx cluster -f ../traj_fit.xtc -cl -s ../../MM/topol.tpr -n ../../index_interface.ndx -b 1000 -method gromos -cutoff XX -nofit
+cd -
+mkdir interface_jp
+cd interface_jp
+# cluster analysis
+# output -> the whole protein
+# analysis ->  backbone_interface that last group in index file   
+gmx cluster -f ../traj_fit.xtc -cl -s ../../MM/topol.tpr -n ../../index_interface.ndx -b 1000 -method jarvis-patrick -cutoff 0.XX -nofit
+done
+
+echo all done

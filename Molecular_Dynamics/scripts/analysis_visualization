@@ -1,0 +1,26 @@
+#!/bin/bash
+# NOTE replace YOURPATH_ with the correct path. 
+#
+# to download the force field from
+#https://www.charmm.org/archive/charmm/resources/charmm-force-fields/download.php?filename=CHARMM_ff_params_files/
+archive/charmm36-jul2017.ff.tgz
+#
+# set  force field directory 
+export GMXLIB={YOURFORCEFIELD_PATH}/forcefield
+# source GROMACS 
+source {YOURGROMACS_PATH}/gmx2020.7/bin/GMXRC
+# replace XXXX with PDB name
+cd {XXXX}/MD
+#
+gmx make_ndx -f ../MM/topol.tpr -o
+#splitch 1 
+#echo 1 | gmx trjconv -f traj_comp.xtc -s ../MM/topol.tpr -n -pbc whole -o traj_w.xtc
+#echo 1 | gmx trjconv -f traj_w.xtc -s ../MM/topol.tpr -n -pbc nojump -o traj_nojump.xtc
+echo 1 | gmx trjconv -f traj_comp.xtc -s ../MM/topol.tpr -n -pbc nojump -o traj_nojump.xtc
+echo 1 |gmx editconf -f ../MM/startMM.gro -n -o nowater.gro
+# to download vmd go to https://www.ks.uiuc.edu/Research/vmd/
+vmd nowater.gro traj_nojump.xtc
+echo 4 1 | gmx trjconv -f traj_nojump.xtc -s ../MM/topol.tpr -fit rot+trans -n -o traj_fit.xtc
+#
+vmd nowater.gro traj_fit.xtc
+

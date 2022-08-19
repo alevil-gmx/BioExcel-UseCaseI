@@ -1,0 +1,9 @@
+Folders are labelled by the PDB-ID of the corresponding antibody-antigen
+complex. Each folder contains a structural file and index_interface.ndx
+file used as input.
+
+Folder scripts contains the following bash script 
+> setting_MD contains  commands used to perform the MD simulations
+> analysis_visualization contains commands used for the analysis/visualize of the MD
+simulations
+> cluster_interface contains commands used for cluster analysis

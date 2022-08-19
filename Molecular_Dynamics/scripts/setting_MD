@@ -1,0 +1,41 @@
+#!/bin/bash
+# NOTE replace YOURPATH_ with the correct path. 
+#
+# to download the force field from
+#https://www.charmm.org/archive/charmm/resources/charmm-force-fields/download.php?filename=CHARMM_ff_params_files/archive/charmm36-jul2017.ff.tgz
+#
+# set  force field directory 
+export GMXLIB={YOURFORCEFIELD_PATH}/forcefield
+# source GROMACS 
+source {YOURGROMACS_PATH}/gmx2020.7/bin/GMXRC
+# set $name  
+export name=antibody
+# replace XXXX with PDB name
+cd {XXXX}
+export namepdb={XXXX}_r_u_label
+gmx pdb2gmx -f $namepdb.pdb -p $name.top -o $name.gro -i posre -ff charmm36-jul2017 -water tip3p -ignh > log 2>&1
+# 
+mkdir MM POS MD
+# 
+gmx editconf -f $name.gro -d 0.7 -bt dodecahedron -o box.gro
+gmx solvate -cp box.gro -p $name.top -o water.gro 
+gmx grompp -f ../mdp_files/steep_charmm36m.mdp -c water.gro -p $name.top -o  
+#  mol ion = (0.15 / 55.6) * n mol water in solution = ion mol (X)
+echo 13 | gmx genion -s topol.tpr -p $name.top -neutral -conc 0.15 -o MM/startMM.gro
+gmx grompp -f ../mdp_files/steep_charmm36m.mdp -c MM/startMM.gro -p $name.top -o MM/topol.tpr
+cd MM
+gmx mdrun -v -s
+cd ..
+gmx grompp -f ../mdp_files/md_eq_posre_charmm36m.mdp -c MM/confout.gro  -r MM/confout.gro -p $name.top -o POS/topol.tpr
+#
+cd POS
+# simulation was performed on the available HPC infrastructure
+# gmx mdrun -s 
+echo `grep 'Long Bond' log`
+cd ..
+gmx grompp -f ../mdp_files/md_charmm36m.mdp -c POS/confout.gro -p $name.top -o MD/topol.tpr
+cd MD
+# simulation was performed on the available HPC infrastructure
+# gmx mdrun -s
+#
+

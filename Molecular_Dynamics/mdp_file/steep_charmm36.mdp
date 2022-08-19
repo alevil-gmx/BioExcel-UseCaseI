@@ -1,0 +1,31 @@
+define                   = -DORIGINAL_TIP3P
+include                  = -I/home/villa/work/UseCaseI/forcefield
+integrator               = steep
+emstep                   = 0.02
+emtol                    = 1000
+nsteps                   = 10000
+comm_grps                = system
+nstxout                  = 2500
+nstvout                  = 2500
+nstfout                  = 0
+nstlog                   = 2500
+nstenergy                = 2500
+nstxout-compressed       = 500
+compressed-x-grps        = system
+;energygrps               = system
+ns_type                  = grid
+pbc                      = xyz
+; non-bonded
+rlist                   = 1.2
+cutoff-scheme           = Verlet
+; coulomb
+coulombtype              = cutoff
+rcoulomb                 = 1.2
+; vdw
+vdwtype                  = Cut-off
+vdw_modifier             = Force-switch
+rvdw_switch              = 1.0
+rvdw                     = 1.2
+constraints              = h-bonds
+constraint_algorithm     = lincs
+lincs_iter               = 4
