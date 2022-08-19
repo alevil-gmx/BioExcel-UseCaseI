@@ -10,6 +10,6 @@ simulation.  Simulations have been performed with GROMACS version 2020 and
 CHARMM36 force field 
 
 The Use Case was presented at the BioExcel Summer School on Biomolecular
-Simulation in 2021 (see doi:10.5281/zenodo.7092339 or https://youtu.be/_TDKfKX4kwM) 
+Simulation in 2021 (see 10.5281/zenodo.7009239 or https://youtu.be/_TDKfKX4kwM) 
 
 
