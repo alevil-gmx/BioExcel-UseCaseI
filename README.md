@@ -1,4 +1,4 @@
-# BioExcel UseCase I: Antibody design  
+# BioExcel UseCase 1: Antibody design  
 
 The Use Case aims to address all the challenges related to antibody design through an
 integrative approach combining the core BioExcel software comprising of
