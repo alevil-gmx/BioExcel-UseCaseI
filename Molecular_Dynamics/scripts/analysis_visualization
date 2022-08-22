@@ -2,8 +2,7 @@
 # NOTE replace YOURPATH_ with the correct path. 
 #
 # to download the force field from
-#https://www.charmm.org/archive/charmm/resources/charmm-force-fields/download.php?filename=CHARMM_ff_params_files/
-archive/charmm36-jul2017.ff.tgz
+#https://www.charmm.org/archive/charmm/resources/charmm-force-fields/download.php?filename=CHARMM_ff_params_files/archive/charmm36-jul2017.ff.tgz
 #
 # set  force field directory 
 export GMXLIB={YOURFORCEFIELD_PATH}/forcefield
