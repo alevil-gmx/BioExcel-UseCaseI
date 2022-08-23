@@ -12,4 +12,4 @@ CHARMM36 force field
 The Use Case was presented at the BioExcel Summer School on Biomolecular
 Simulation in 2021 (see https://doi.org/10.5281/zenodo.7009238  or https://youtu.be/_TDKfKX4kwM) 
 
-All the files are licensed under the CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)
+All the input files and script has been developed for the European BioExcel (http://bioexcel.eu/) and are licensed under the CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)
